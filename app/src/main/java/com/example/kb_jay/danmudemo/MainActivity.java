@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -26,11 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayBlockingQueue<View> views = new ArrayBlockingQueue<View>(20);
         for (int i = 0; i < 20; i++) {
-            TextView textView = new TextView(this);
-            textView.setText("test"+i);
-            textView.setTextColor(Color.RED);
+            View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.item, null);
             try {
-                views.put(textView);
+                views.put(view);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

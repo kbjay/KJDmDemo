@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 
 import android.view.View;
 
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -78,8 +79,9 @@ public class KJDmView extends RelativeLayout {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
-                        view.setX(0);
+                        view.measure(0,0);
+                        int measuredWidth = view.getMeasuredWidth();
+                        view.setX(mWidth);
                         if(mHasSpanY){
                             view.setY(mSpanY);
                             mHasSpanY=false;
@@ -90,7 +92,7 @@ public class KJDmView extends RelativeLayout {
 
                         addView(view);
 
-                        view.animate().translationX(mWidth).setDuration(3000).setListener(new Animator.AnimatorListener() {
+                        view.animate().translationX(-measuredWidth).setDuration(3000).setListener(new Animator.AnimatorListener() {
                             @Override
                             public void onAnimationStart(Animator animation) {
                             }
